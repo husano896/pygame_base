@@ -1,5 +1,6 @@
-SDL2 = True
-RenderEnabled = True
+#Customization for pygame_sdl2 feature
+SDL2 = False
+RenderEnabled = True and SDL2
 if (SDL2):
     try:
         import pygame_sdl2
@@ -8,7 +9,8 @@ if (SDL2):
     except ImportError:
         print("pygame_sdl2 importing failed! Disabled SDL2")
         SDL2 = False
-
+        RenderEnabled = False
+        
 import pygame
 import System.Audio
 from Scene.__Changer__ import Scene_Changer

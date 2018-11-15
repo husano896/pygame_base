@@ -12,16 +12,18 @@ from Scene.Title import Scene_Title
 #Game name
 GAMENAME = "Hello pygame"
 cache_ImgDebugInfo = None
-
+startup_Scene = Scene_Title()
+frame = 0
 def showFPS():
-    global FPSCLOCK
+    global FPSCLOCK, frame
     
-    img_FPS = pygame.pgSys.Font.render("%.2f" % (FPSCLOCK.get_fps()) , 1, (255,255,255))
+    img_FPS = pygame.pgSys.Font.render("%.2f (%d)" % (FPSCLOCK.get_fps(), frame) , 1, (255,255,255))
     if (pygame.pgSys.RenderEnabled):
         pygame.render.Sprite(pygame.pgSys.Renderer.load_texture(img_FPS)).render((0,0))
     else:
         pygame.pgSys.Screen.blit(img_FPS,(0,0))
 
+    frame+=1
     pygame.display.set_caption("%s %.2f" % (GAMENAME, FPSCLOCK.get_fps()))
 
 def showDebugInfo():
@@ -51,7 +53,7 @@ def main():
     FPSCLOCK = pygame.time.Clock()
     cur_x, cur_y = 0, 0
 
-    pygame.pgSys.ChangeScene(Scene_Title())
+    pygame.pgSys.ChangeScene(startup_Scene)
     while True:
         #Exit event is handled in main process
         exitEvent = pygame.event.get(pygame.QUIT)
