@@ -1,6 +1,7 @@
 #Customization for pygame_sdl2 feature
-SDL2 = False
+SDL2 = True
 RenderEnabled = True and SDL2
+FreeType = True
 if (SDL2):
     try:
         import pygame_sdl2
@@ -12,6 +13,8 @@ if (SDL2):
         RenderEnabled = False
         
 import pygame
+if (not SDL2):
+    import pygame.freetype
 import System.Audio
 from Scene.__Changer__ import Scene_Changer
 #### Initalize
@@ -28,7 +31,7 @@ class Game_System():
         pygame.init()
         
         self.WINDOWWIDTH, self.WINDOWHEIGHT = WINDOWWIDTH, WINDOWHEIGHT
-        self.BGColor = (127, 127, 127)
+        self.BGColor = (0, 0, 0)
         self.Screen = pygame.display.set_mode((self.WINDOWWIDTH,self.WINDOWHEIGHT), pygame.HWSURFACE | pygame.DOUBLEBUF)
         
         self.Scene = None
@@ -36,7 +39,12 @@ class Game_System():
         self.Audio.init()
         self.SDL2 = SDL2
 
-        self.Font = pygame.font.Font("Fonts/NotoSansCJKtc-Regular.otf", 14)
+        #New
+        if (SDL2):
+            #Old
+            self.Font = pygame.font.Font("Fonts/NotoSansCJKtc-Regular.otf", 14)
+        else:
+            self.Font = pygame.freetype.Font("Fonts/NotoSansCJKtc-Regular.otf", 14)
 
         self.RenderEnabled = RenderEnabled
         self.Handle_Events_InMain = True
@@ -50,6 +58,9 @@ class Game_System():
                 
     def ChangeScene(self, nextScene):
         self.Scene = Scene_Changer(nextScene)
+
+    def InitDisplay(self):
+        self.Screen = pygame.display.set_mode((self.WINDOWWIDTH,self.WINDOWHEIGHT), pygame.HWSURFACE | pygame.DOUBLEBUF)
         
 #Inject into pygame
 pygame.pgSys = Game_System()
