@@ -4,14 +4,11 @@ from Scene.__Base__ import __Base__
 class Scene_Title(__Base__):
     
     def __init__(self):
-        img1 = pygame.pgSys.Font.render("Hello pygame!", 1, (255,255,255))
-        
-        if (pygame.pgSys.RenderEnabled):
-            self.Image1 = pygame.render.Sprite(pygame.pgSys.Renderer.load_texture(img1))
-        else:
-            self.Image1 = img1
 
-        self.Image1_rect = img1.get_rect()
+        img1 = pg.Sys.Font.render("Hello pygame!", 1, (255,255,255))
+        
+        self.image1 = img1
+
     def onChange(self):
         pass
 
@@ -22,8 +19,7 @@ class Scene_Title(__Base__):
         pass
 
     def graphicsUpdate(self):
-        pos = (pygame.pgSys.WINDOWWIDTH/2 - self.Image1_rect.w/2,pygame.pgSys.WINDOWHEIGHT/2 - self.Image1_rect.h/2)
-        if (pygame.pgSys.RenderEnabled):
-            self.Image1.render(pos)
-        else:
-            pygame.pgSys.Screen.blit(self.Image1,pos)
+        pos = (pg.Sys.WINDOWWIDTH/2, pg.Sys.WINDOWHEIGHT/2)
+        rect = self.image1.get_rect()
+        rect.center = pos
+        pg.Sys.Screen.blit(self.image1,rect)
