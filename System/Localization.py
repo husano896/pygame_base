@@ -1,7 +1,7 @@
 import json
 _translations = {}
-
 _languages = ['zh-Hant', 'en']
+_useLang = 'zh-Hant'
 
 def _load_langfiles():
     global _translations, _languages
@@ -9,9 +9,14 @@ def _load_langfiles():
         filepath = 'Languages/' + langName+'.json'
         with open(filepath, encoding='utf-8') as data_file:
             _translations[langName] = json.loads(data_file.read())
+
+def setLang(lang):
+    global _useLang
+    _useLang = lang
+
+def l(key, lang = None):
+    global _translations,_useLang
     
-def l(key, lang):
-    global _translations
-    return _translations[lang][key]
+    return _translations[lang or _useLang][key]
 
 _load_langfiles()

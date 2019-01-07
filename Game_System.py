@@ -1,4 +1,5 @@
 import pygame as pg
+import pygame.freetype as ft
 import System.Audio
 import System.Localization
 from Scene.__Changer__ import Scene_Changer
@@ -24,9 +25,8 @@ class Game_System():
         self.Audio = System.Audio
         self.Audio.init()
         self.Events = []
-        self.Font = pg.font.Font("Fonts/NotoSansCJKtc-Regular.otf", 14)
-        self.FontLarge = pg.font.Font("Fonts/NotoSansCJKtc-Regular.otf", 32)
-        self.L10n = System.Localization
+        self.Font = ft.Font("Fonts/NotoSansCJKtc-Regular.otf", 14)
+        self.FontLarge = ft.Font("Fonts/NotoSansCJKtc-Regular.otf", 32)
         
     def ChangeScene(self, nextScene):
         self.Scene = Scene_Changer(nextScene)
@@ -42,7 +42,7 @@ class Game_System():
                 exit()
                 return
         
-        
-    
 #Inject into pygame
 pg.Sys = Game_System()
+#for i18n
+pg.l = System.Localization.l

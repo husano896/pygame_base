@@ -5,7 +5,7 @@ class Scene_Title(__Base__):
     
     def __init__(self):
 
-        img1 = pg.Sys.Font.render("Hello pygame!", 1, (255,255,255))
+        img1 = pg.Sys.Font.render("Hello pygame!", (255,255,255))
         
         self.image1 = img1
 
@@ -20,6 +20,6 @@ class Scene_Title(__Base__):
 
     def graphicsUpdate(self):
         pos = (pg.Sys.WINDOWWIDTH/2, pg.Sys.WINDOWHEIGHT/2)
-        rect = self.image1.get_rect()
+        rect = self.image1[1]
         rect.center = pos
-        pg.Sys.Screen.blit(self.image1,rect)
+        pg.Sys.Screen.blit(self.image1[0],rect)
