@@ -9,8 +9,7 @@ class Scene_Intro(__Base__):
                 
         img1 = Font.render("pygame presents", 1, (255,255,255))
             
-        self.Image1 = img1
-
+        self.Image1 = pg.Sys.Texture(img1)
         self.Image1_rect = img1.get_rect()
         self.frame = 0
         
@@ -34,9 +33,10 @@ class Scene_Intro(__Base__):
         else:
             alpha = min(int(self.frame*2), 255)
 
-        self.Image1.set_alpha(alpha)
-
+        self.Image1.alpha = alpha
+        
     def graphicsUpdate(self):
-        pos = (pg.Sys.WINDOWWIDTH/2 - self.Image1_rect.w/2,pg.Sys.WINDOWHEIGHT/2 - self.Image1_rect.h/2)
+        pos = self.Image1_rect
+        pos.center = (WINDOWWIDTH/2, WINDOWHEIGHT/2)
 
-        pg.Sys.Screen.blit(self.Image1,pos)
+        pg.Sys.Renderer.copy(self.Image1,None, pos)

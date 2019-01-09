@@ -5,10 +5,10 @@ class Scene_Changer(__Base__):
     def __init__(self, newscene, speed = 8):
         self.frame = 0
         self.speed = speed
-        self.Img_LastScene = pg.Sys.Screen.copy()
+        #self.Img_LastScene = pg.Sys.Screen.copy()
         
         newscene.update()
-        self.Img_NewScene = pg.Sys.Screen.copy()
+        #self.Img_NewScene = pg.Sys.Screen.copy()
         
         self.new_scene = newscene
 
@@ -18,10 +18,7 @@ class Scene_Changer(__Base__):
         
     def update(self):
         
-        self.Img_NewScene.set_alpha(self.frame)
-
-        pg.Sys.Screen.blit(self.Img_LastScene, (0,0))
-        pg.Sys.Screen.blit(self.Img_NewScene, (0,0))
+        #self.Img_NewScene.set_alpha(self.frame)
         self.frame+=self.speed
         
         if (self.frame >= 256):
